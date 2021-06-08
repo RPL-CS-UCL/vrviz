@@ -21,8 +21,8 @@
         <arg name="manual_image_copy" value="true"/>
     </include>
 
-    <include file="$(find turtlebot_gazebo)/launch/turtlebot_world.launch">
-      <arg name="gui" value="false"/>
+    <include file="$(find turtlebot3_gazebo)/launch/turtlebot3_world.launch">
+      <!--<arg name="gui" value="false"/>-->
     </include>
 
     <node pkg="vrviz" type="marker_test" name="marker_test" >
@@ -31,8 +31,8 @@
 
     <!-- GROUP - SIMULATION -->
     <group if="$(arg navigation)">
-        <include file="$(find turtlebot_gazebo)/launch/amcl_demo.launch"/>
-        <!--include file="$(find turtlebot_rviz_launchers)/launch/view_navigation.launch"/-->
+        <include file="$(find turtlebot3_gazebo)/launch/amcl_demo.launch"/>
+        <!--include file="$(find turtlebot3_rviz_launchers)/launch/view_navigation.launch"/-->
 
         <!-- Connect to map frame -->
         <node pkg="tf" type="static_transform_publisher" name="coordinate_vrviz_base_base"

@@ -473,7 +473,7 @@ private:
                 mat1.set(1,0,0,0,
                          0,-1,0,0,
                          0,0,-1,0,
-                         0,0,hud_dist,1);
+                         0.0,-1.5,hud_dist,1);
     //            cv::Matx34d proj = cam_model.projectionMatrix();
     //            mat1.set(proj.val[0],proj.val[1],proj.val[2],0,
     //                     proj.val[3],proj.val[4],proj.val[5],0,

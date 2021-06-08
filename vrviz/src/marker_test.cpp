@@ -55,7 +55,7 @@ void publishCallback(const ros::TimerEvent&)
         marker.pose.orientation.y = 0.0;
         marker.pose.orientation.z = 0.0;
         marker.pose.orientation.w = 1.0;
-        marker.text="USE WAND TRIGGER TO DRIVE";
+        marker.text="USE WAND TRIGGER TO MOVE THE CLOUD";
         msg.markers.push_back(marker);
     }
     if(silly_shapes)
@@ -390,7 +390,7 @@ void publishCallback(const ros::TimerEvent&)
 
   t.setOrigin(tf::Vector3(-0.1, 0.1, 0.6));
   t.setRotation(tf::Quaternion(0.0, 0.0, 0.0, 1.0));
-  br.sendTransform(tf::StampedTransform(t, ros::Time::now(), "base_link", "my_tf_label"));
+  br.sendTransform(tf::StampedTransform(t, ros::Time::now(), "world", "my_tf_label"));
 
 }
 

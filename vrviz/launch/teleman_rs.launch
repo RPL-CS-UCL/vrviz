@@ -1,0 +1,59 @@
+<launch>
+    <arg name="approximate_sync" default="true" />
+
+    <!-- Silly shapes shows test visualization_markers -->
+    <arg name="silly_shapes" default="false"/>
+    
+    <!-- remap from="/d435i/camera/color/image_raw" to="/camera/rgb/image_raw"/-->
+    
+    <include file="$(find vrviz)/launch/vrviz.launch">
+      <arg name="cloud_remap" value="/d435i/camera/depth_registered/points"/>
+      <arg name="marker_remap" value="/marker_array"/>
+      <arg name="load_robot" value="true"/>
+      <arg name="show_tf" value="false"/>
+      <arg name="scaling_factor" value="1"/>
+      <arg name="point_size" value="1"/>
+      <!-- This does not work due to the camera_info messages not being synced. -->
+      <arg name="image_remap" value="/d435i/camera/color/image_raw"/>
+      <arg name="hud_dist" default="2.0"/>
+      <arg name="hud_size" default="1.0"/>
+      <!-- <arg name="twist_remap" value="/cmd_vel_mux/input/teleop"/> -->
+      <arg name="manual_image_copy" value="true"/>  
+  </include>
+  
+  <!-- To make the image appear -->
+  <node pkg="image_transport" type="republish" name="color_repub"
+        args="compressed in:=/d435i/camera/color/image_raw raw out:=/camera/rgb/image_raw">
+  </node>
+  
+  <!--
+  <node pkg="image_transport" type="republish" name="color_repub"
+        args="compressed raw">
+      <remap from="in"  to="/d435i/camera/color/image_raw"/>
+      <remap from="out" to="/camera/rgb/image_raw"/>
+  </node>
+  -->
+   <!-- Connect to visual sensor frame -->
+   <!--
+   <node pkg="tf" type="static_transform_publisher" name="coordinate_vrviz_base_base"
+        args="0 0 0 1.57 0 1.57 d435i/camera_link vrviz_base  10"
+   />
+   -->
+   <node pkg="tf" type="static_transform_publisher" name="coordinate_vrviz_base_base"
+        args="-1.0 0 0 -1.57 0 1.57 d435i/camera_link vrviz_base  10"
+   />
+        
+   <!-- Connect to robot frame -->
+   <!--
+   <node pkg="tf" type="static_transform_publisher" name="coordinate_vrviz_robot"
+        args="0 0 0 0 0 0 world vrviz_base 10"
+        />
+   -->
+   <!-- args="0 0 0 0 0 1.57079632679 world vrviz_base 10" -->
+
+    <!--   
+    <node pkg="vrviz" type="marker_test" name="marker_test" >
+        <param name="silly_shapes" value="$(arg silly_shapes)" />
+    </node>
+   -->
+</launch>

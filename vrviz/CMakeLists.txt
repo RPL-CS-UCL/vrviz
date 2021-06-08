@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(vrviz)
 
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
 set(PLATFORM 64)
 set(SDL_REQUIRED_LIBRARIES SDL2)
 add_definitions(-DLINUX -DPOSIX)
@@ -15,7 +18,6 @@ set(SHARED_SRC_DIR src/shared)
   set(CMAKE_CXX_FLAGS         "${CMAKE_CXX_FLAGS} -std=c++11 -include ${SHARED_SRC_DIR}/compat.h")
   set(CMAKE_CXX_FLAGS_DEBUG   "${CMAKE_CXX_FLAGS_DEBUG} -Wall -Wextra -pedantic -g")
   set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O2")
-
 
 find_package(catkin REQUIRED COMPONENTS
   roscpp
